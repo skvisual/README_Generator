@@ -1,8 +1,8 @@
 var fs = require('fs')
 var axios = require('axios')
 var inquirer = require('inquirer')
-const apikey = '4efea0fa4c2aad2d02260be69fb7ed026869eec6'
-// var username = "username"
+var util = require('util')
+var appendFileAsync = util.promisify(fs.appendFile)
 
 const questions = [
   {
@@ -29,7 +29,7 @@ const questions = [
 
 inquirer
   .prompt(questions)
-  .then(function({ username, projectName, projectDesc, tableConfirm}) {
+  .then(async function({ username, projectName, projectDesc, tableConfirm}) {
     //Define queryURL with const. use ${username}
     const queryURL = `https://api.github.com/users/${username}`;
 
@@ -41,32 +41,41 @@ inquirer
       
         console.log(res.data.email);
     });
-    // console.log(username)
-    // console.log(projectName)
+    console.log(username)
+    console.log(projectName)
 
     //Append projectName to 'README.md' using fs method appendFile(), make large by using #? fs.appendFile('README.md', '#' + res.projectName, function(err){}); 
-    fs.appendFile('README.md', '# ' + projectName + `\n`, function(err){
-      if (err) {
-        console.log('error')
-      }else
-        console.log('append projectName success')
-    });
+     await appendFileAsync('README.md', '# ' + projectName + `\n`)
+     .then(function(){
+       console.log('append success')
+     }).catch(function(err){
+       console.log(err)
+     })
+     
+      //Append projectDesc to 'README.md' using fs method appendFile()
+      await appendFileAsync('README.md', projectDesc + `\n`)
+      .then(function(){
+        console.log('append desc success')
+      }).catch(function(err){
+        console.log(err)
+      })
+
+      if (tableConfirm === false) {
+        console.log("go to next question")
+      } else {
+        await appendFileAsync('README.md', '## Table of Contents' + `\n`)
+        .then(function(){
+          console.log('append toc success')
+        
+       }).catch(function(err){
+         console.log(err)
+       })
 
     // console.log(projectDesc) 
 
-    //Append projectDesc to 'README.md' using fs method appendFile()
-    fs.appendFile('README.md', projectDesc + `\n`, function(err){
-      if (err) {
-        console.log('error')
-      }else
-        console.log('append projectDesc success')
-    });
-    
+   
 
-    if (tableConfirm !== true) {
-      console.log("go to next question")
-    } else {
-      console.log("prompt for header or subtext")
+    
     }
     
   });
