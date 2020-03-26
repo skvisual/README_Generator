@@ -1,12 +1,16 @@
 # README Generator
-A simple way to create READMEs inside of terminal
+An easy way to create clean-looking README files.
 # Table of Contents
-## Overview
-Provides an overview of the project
 ## Features
-Explains features the user should know
+Features an easy to use interface that allows quick production.
 ## Future Developments
-Provides insight in to future developments
-
-## Did you know?
-This README file was created with this generator!
+Come here to check on all future developments! :)
+## Installation
+# Usage
+# License
+# Contributing
+# Tests
+This README was created with this program!
+# Contact
+![Image description](https://avatars3.githubusercontent.com/u/59944251?v=4)  
+GitHub E-mail: null

@@ -41,7 +41,7 @@ function makeLine(){
   });
 };
 
-function askNew(){
+function askNew() {
   inquirer
   .prompt([
     {
@@ -53,17 +53,167 @@ function askNew(){
     if (confirmNew === true) {
       makeLine();
     } else {
-      console.log('run next questions')
+      installHeader();
+    };
+  });
+}
+
+function usage(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add a Usage HEADER?',
+      name: 'confirmUsage',
+    },
+  ]).then(function({confirmUsage}) {
+    if (confirmUsage === true) {
+      appendFileAsync('README.md', '# Usage' + '\n')
+      license()
+    } else {
+      license()
+    };
+  });
+}
+
+function license(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add a License HEADER?',
+      name: 'confirmLicense',
+    },
+  ]).then(function({confirmLicense}) {
+    if (confirmLicense === true) {
+      appendFileAsync('README.md', '# License' + '\n')
+      contributing()
+    } else {
+      contributing()
+    };
+  });
+};
+
+function contributing(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add a Contributing HEADER?',
+      name: 'confirmContributing',
+    },
+  ]).then(function({confirmContributing}) {
+    if (confirmContributing === true) {
+      appendFileAsync('README.md', '# Contributing' + '\n')
+      tests()
+    } else {
+      tests()
+    };
+  });
+
+}
+
+function tests(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add a Tests HEADER?',
+      name: 'confirmtests',
+    },
+  ]).then(function({confirmtests}) {
+    if (confirmtests === true) {
+      appendFileAsync('README.md', '# Tests' + '\n')
+      query()
+    } else {
+      query()
+    };
+  });
+
+}
+
+function query(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add a Contact HEADER?',
+      name: 'confirmQuery',
+    },
+  ]).then(function({confirmQuery}) {
+    if (confirmQuery === true) {
+      appendFileAsync('README.md', '# Contact' + '\n')
+      contactInfo()
+    } else {
+      contactInfo()
+    };
+  });
+
+}
+
+
+// var pictureURL = res.data.avatar_url
+
+//make a picture var that is = the api value
+
+function contactInfo(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add your GitHub Picture and E-mail?',
+      name: 'confirmContactInfo',
+    },
+    
+  ]).then(function({confirmContactInfo}) {
+    if (confirmContactInfo){
+      inquirer
+      .prompt([
+        {
+          type: 'input',
+          message: 'Enter your GitHub username:',
+          name: 'username'
+        },
+      ]).then(function({username}){
+        const queryURL = `https://api.github.com/users/${username}`;
+
+        axios
+        .get(queryURL)
+        .then(async function(res) { 
+            await appendFileAsync('README.md', `![Image description](${res.data.avatar_url})  \n`)
+            await appendFileAsync('README.md', 'GitHub E-mail: ' + res.data.email)
+          
+       })
+
+      })
+        
+    }
+    
+  });
+
+}
+
+function installHeader(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add an Installation HEADER?',
+      name: 'installConfirm',
+    },
+  ]).then(function({installConfirm}) {
+    if (installConfirm === true) {
+      appendFileAsync('README.md', '## Installation' + `\n`)
+      usage()
+    } else {
+      usage()
     }
   })
 }
+  
 
 const questions = [
-  {
-    type: 'input',
-    message: 'Enter your GitHub username:',
-    name: 'username'
-  },
+  
   {
     type: 'input',
     message: 'Enter a project title:',
@@ -76,52 +226,43 @@ const questions = [
   },
   {
     type: 'confirm',
-    message: 'Do you want to make a ToC now?',
+    message: 'Do you want to make a Table of Contents?',
     name: 'tableConfirm'
   },
 ];
 
 inquirer
   .prompt(questions)
-  .then(async function({ username, projectName, projectDesc, tableConfirm}) {
-    //Define queryURL with const. use ${username}
-    const queryURL = `https://api.github.com/users/${username}`;
+  .then(async function({ projectName, projectDesc, tableConfirm }) {
 
-    axios
-    .get(queryURL) //use queryURL defined above
-    .then(function(res) { //run function with the response data as a parameter
-        // console.log(res);
-        // console.log(res.data.avatar_url);
-      
-        // console.log(res.data.email);
-    });
-    // console.log(username)
-    // console.log(projectName)
-
-    //Append projectName to 'README.md' using fs method appendFile(), make large by using #? fs.appendFile('README.md', '#' + res.projectName, function(err){}); 
+       
      await appendFileAsync('README.md', '# ' + projectName + `\n`)
      .then(function(){
       //  console.log('append success')
      }).catch(function(err){
        console.log(err)
      })
-     
-      //Append projectDesc to 'README.md' using fs method appendFile()
       await appendFileAsync('README.md', projectDesc + `\n`)
       .then(function(){
-        // console.log('append desc success')
       }).catch(function(err){
         console.log(err)
       })
-        //WHERE TABLE OF CONTENT GENERATION BEGINS
+        //TABLE OF CONTENT GENERATION
       if (tableConfirm === true) {
         await appendFileAsync('README.md', '# Table of Contents' + `\n`)
-        makeLine()
+        makeLine();
       } else {
-        console.log('questionsTWO()')
+        installHeader();
       }
+      
+      
+        
+        
+     
   });
+      
+      
 
-  // inquirer
-  // .prompt(finishQuestions)
-  // .then(async function({}) {
+
+      
+
