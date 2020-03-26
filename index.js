@@ -59,10 +59,10 @@ inquirer
       }).catch(function(err){
         console.log(err)
       })
-
+              //WHERE TABLE OF CONTENT GENERATION BEGINS
       if (tableConfirm === false) {
         // console.log("go to next question")
-      } else {
+      } else { //if tableConfirm is true then create a ToC header and prompt style question
         await appendFileAsync('README.md', '## Table of Contents' + `\n`)
           inquirer
           .prompt([
@@ -82,16 +82,21 @@ inquirer
                 name: 'headerText',
               },
             ]).then(function({headerText}) {
-              appendFileAsync('README.md', '### '+ headerText + '\n')
-            })
-            // console.log('make a header')
-          }
-            // console.log(answers.textStyle)
-
-          // console.log(answers.textStyle)
+              appendFileAsync('README.md', '#### '+ headerText + '\n')
+            })} else {
+              inquirer
+              .prompt([
+                {
+                  type: 'input',
+                  message: 'Enter Desired Plain Text:',
+                  name: 'plainText',
+                },
+              ]).then(function({plainText}) {
+                appendFileAsync('README.md', plainText + '\n')
+              })
+            }
         })
       }
-        // console.log('append ToC Header success') 
     });
 
 
