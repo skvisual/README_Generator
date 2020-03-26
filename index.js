@@ -4,6 +4,60 @@ var inquirer = require('inquirer')
 var util = require('util')
 var appendFileAsync = util.promisify(fs.appendFile)
 
+function makeLine(){
+  inquirer
+    .prompt([
+      {
+      type: 'list',
+      message: 'Select the type of text',
+      choices: ['Header', 'Plain Text'],
+      name: 'textStyle',
+    },  
+  ]).then(function(answers){
+    if (answers.textStyle === 'Header') {
+      inquirer
+      .prompt([
+        {
+          type: 'input',
+          message: 'Enter Desired Text for Header:',
+          name: 'headerText',
+        },
+      ]).then(function({headerText}) {
+        appendFileAsync('README.md', '## '+ headerText + '\n')
+        askNew()
+      })} else {
+        inquirer
+        .prompt([
+          {
+            type: 'input',
+            message: 'Enter Desired Plain Text:',
+            name: 'plainText',
+          },
+        ]).then(function({plainText}) {
+          appendFileAsync('README.md', plainText + '\n')
+          askNew()
+        });
+      };
+  });
+};
+
+function askNew(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add another line?',
+      name: 'confirmNew',
+    },
+  ]).then(function({confirmNew}) {
+    if (confirmNew === true) {
+      makeLine();
+    } else {
+      console.log('run next questions')
+    }
+  })
+}
+
 const questions = [
   {
     type: 'input',
@@ -59,52 +113,15 @@ inquirer
       }).catch(function(err){
         console.log(err)
       })
-              //WHERE TABLE OF CONTENT GENERATION BEGINS
-      if (tableConfirm === false) {
-        // console.log("go to next question")
-      } else { //if tableConfirm is true then create a ToC header and prompt style question
-        await appendFileAsync('README.md', '## Table of Contents' + `\n`)
-          inquirer
-          .prompt([
-            {
-            type: 'list',
-            message: 'Select the type of text',
-            choices: ['Header', 'Plain Text'],
-            name: 'textStyle',
-          },  
-        ]).then(function(answers){
-          if (answers.textStyle === 'Header') {
-            inquirer
-            .prompt([
-              {
-                type: 'input',
-                message: 'Enter Desired Text for Header:',
-                name: 'headerText',
-              },
-            ]).then(function({headerText}) {
-              appendFileAsync('README.md', '#### '+ headerText + '\n')
-            })} else {
-              inquirer
-              .prompt([
-                {
-                  type: 'input',
-                  message: 'Enter Desired Plain Text:',
-                  name: 'plainText',
-                },
-              ]).then(function({plainText}) {
-                appendFileAsync('README.md', plainText + '\n')
-              })
-            }
-        })
+        //WHERE TABLE OF CONTENT GENERATION BEGINS
+      if (tableConfirm === true) {
+        await appendFileAsync('README.md', '# Table of Contents' + `\n`)
+        makeLine()
+      } else {
+        console.log('questionsTWO()')
       }
-    });
+  });
 
-
-  
-
-
-
- 
-
-
-
+  // inquirer
+  // .prompt(finishQuestions)
+  // .then(async function({}) {
