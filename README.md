@@ -1,12 +1,12 @@
-![](https://img.shields.io/badge/GitHub-GET%20THIS%20CODE-blue?style=social&logo=appveyor?&link=http://https://github.com/skvisual&link=https://github.com/skvisual/README_Generator) 
+![](https://img.shields.io/badge/GitHub-GET%20THIS%20CODE-blue?style=social&logo=appveyor?&link=https://github.com/skvisual&link=https://github.com/skvisual/README_Generator) 
 # README Generator
-An easy way to create professional looking README files.
+An easy to use program that assists in the creation of professional looking README files
 # Table of Contents
 ## Features
-An easy to use interface reduces time spent on README creation.
+Simple interface reduces times spent compiling README files.
 ## Future Developments
-Working on adding more functionality when creating content.
-## Installation
+Working on adding additional options when creating content.
+# Installation
 # Usage
 # License
 # Contributions
