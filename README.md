@@ -1,16 +1,15 @@
 # README Generator
-An easy way to create clean-looking README files.
+An easy way to create a readme file!
 # Table of Contents
 ## Features
-Features an easy to use interface that allows quick production.
+Explain the features here
 ## Future Developments
-Come here to check on all future developments! :)
+Watch for future developments here
 ## Installation
 # Usage
 # License
-# Contributing
+# Contributions
 # Tests
-This README was created with this program!
 # Contact
 ![Image description](https://avatars3.githubusercontent.com/u/59944251?v=4)  
 GitHub E-mail: null

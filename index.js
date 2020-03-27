@@ -50,7 +50,7 @@ function askNew() {
       name: 'confirmNew',
     },
   ]).then(function({confirmNew}) {
-    if (confirmNew === true) {
+    if (confirmNew) {
       makeLine();
     } else {
       installHeader();
@@ -63,11 +63,11 @@ function usage(){
   .prompt([
     {
       type: 'confirm',
-      message: 'Do you want to add a Usage HEADER?',
+      message: 'Do you want to add a USAGE header?',
       name: 'confirmUsage',
     },
   ]).then(function({confirmUsage}) {
-    if (confirmUsage === true) {
+    if (confirmUsage) {
       appendFileAsync('README.md', '# Usage' + '\n')
       license()
     } else {
@@ -81,11 +81,11 @@ function license(){
   .prompt([
     {
       type: 'confirm',
-      message: 'Do you want to add a License HEADER?',
+      message: 'Do you want to add a LICENSE header?',
       name: 'confirmLicense',
     },
   ]).then(function({confirmLicense}) {
-    if (confirmLicense === true) {
+    if (confirmLicense) {
       appendFileAsync('README.md', '# License' + '\n')
       contributing()
     } else {
@@ -99,18 +99,17 @@ function contributing(){
   .prompt([
     {
       type: 'confirm',
-      message: 'Do you want to add a Contributing HEADER?',
+      message: 'Do you want to add a CONTRIBUTIONS header?',
       name: 'confirmContributing',
     },
   ]).then(function({confirmContributing}) {
-    if (confirmContributing === true) {
-      appendFileAsync('README.md', '# Contributing' + '\n')
+    if (confirmContributing) {
+      appendFileAsync('README.md', '# Contributions' + '\n')
       tests()
     } else {
       tests()
     };
   });
-
 }
 
 function tests(){
@@ -118,11 +117,11 @@ function tests(){
   .prompt([
     {
       type: 'confirm',
-      message: 'Do you want to add a Tests HEADER?',
+      message: 'Do you want to add a TESTS header?',
       name: 'confirmtests',
     },
   ]).then(function({confirmtests}) {
-    if (confirmtests === true) {
+    if (confirmtests) {
       appendFileAsync('README.md', '# Tests' + '\n')
       query()
     } else {
@@ -137,24 +136,18 @@ function query(){
   .prompt([
     {
       type: 'confirm',
-      message: 'Do you want to add a Contact HEADER?',
+      message: 'Do you want to add a CONTACT header?',
       name: 'confirmQuery',
     },
   ]).then(function({confirmQuery}) {
-    if (confirmQuery === true) {
+    if (confirmQuery) {
       appendFileAsync('README.md', '# Contact' + '\n')
       contactInfo()
     } else {
       contactInfo()
     };
   });
-
 }
-
-
-// var pictureURL = res.data.avatar_url
-
-//make a picture var that is = the api value
 
 function contactInfo(){
   inquirer
@@ -182,15 +175,10 @@ function contactInfo(){
         .then(async function(res) { 
             await appendFileAsync('README.md', `![Image description](${res.data.avatar_url})  \n`)
             await appendFileAsync('README.md', 'GitHub E-mail: ' + res.data.email)
-          
        })
-
       })
-        
     }
-    
   });
-
 }
 
 function installHeader(){
@@ -198,11 +186,11 @@ function installHeader(){
   .prompt([
     {
       type: 'confirm',
-      message: 'Do you want to add an Installation HEADER?',
+      message: 'Do you want to add an INSTALLATION header?',
       name: 'installConfirm',
     },
   ]).then(function({installConfirm}) {
-    if (installConfirm === true) {
+    if (installConfirm) {
       appendFileAsync('README.md', '## Installation' + `\n`)
       usage()
     } else {
@@ -211,12 +199,11 @@ function installHeader(){
   })
 }
   
-
 const questions = [
   
   {
     type: 'input',
-    message: 'Enter a project title:',
+    message: 'Welcome! Please Enter a project title:',
     name: 'projectName'
   },
   {
@@ -226,7 +213,7 @@ const questions = [
   },
   {
     type: 'confirm',
-    message: 'Do you want to make a Table of Contents?',
+    message: 'Do you want to make a TABLE OF CONTENTS?',
     name: 'tableConfirm'
   },
 ];
@@ -248,17 +235,12 @@ inquirer
         console.log(err)
       })
         //TABLE OF CONTENT GENERATION
-      if (tableConfirm === true) {
+      if (tableConfirm) {
         await appendFileAsync('README.md', '# Table of Contents' + `\n`)
         makeLine();
       } else {
         installHeader();
       }
-      
-      
-        
-        
-     
   });
       
       
