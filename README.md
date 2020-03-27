@@ -5,12 +5,14 @@ An easy to use program that assists in the creation of professional looking READ
 ## Features
 Simple interface reduces times spent compiling README files.
 ## Future Developments
-Working on adding additional options when creating content.
+Working on adding the ability to create new lines with every header option
 # Installation
+Please run 'npm i' & 'npm install dotenv' before use.
 # Usage
 # License
 # Contributions
 # Tests
+This README was created with this program :)
 # Contact
 ![Image description](https://avatars3.githubusercontent.com/u/59944251?v=4)  
 GitHub E-mail: null

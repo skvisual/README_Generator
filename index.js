@@ -149,6 +149,24 @@ function query(){
   });
 }
 
+function installHeader(){
+  inquirer
+  .prompt([
+    {
+      type: 'confirm',
+      message: 'Do you want to add an INSTALLATION header?',
+      name: 'installConfirm',
+    },
+  ]).then(function({installConfirm}) {
+    if (installConfirm) {
+      appendFileAsync('README.md', '# Installation' + `\n`)
+      usage()
+    } else {
+      usage()
+    }
+  })
+}
+
 function contactInfo(){
   inquirer
   .prompt([
@@ -172,32 +190,16 @@ function contactInfo(){
 
         axios
         .get(queryURL)
-        .then(async function(res) { 
-            await appendFileAsync('README.md', `![Image description](${res.data.avatar_url})  \n`)
-            await appendFileAsync('README.md', 'GitHub E-mail: ' + res.data.email)
+        .then(async function(res) {
+          await appendFileAsync('README.md', '### GitHub E-mail: ' + res.data.email + '\n')
+          await appendFileAsync('README.md', `![Image description](${res.data.avatar_url})  \n`)
        })
       })
     }
   });
 }
 
-function installHeader(){
-  inquirer
-  .prompt([
-    {
-      type: 'confirm',
-      message: 'Do you want to add an INSTALLATION header?',
-      name: 'installConfirm',
-    },
-  ]).then(function({installConfirm}) {
-    if (installConfirm) {
-      appendFileAsync('README.md', '# Installation' + `\n`)
-      usage()
-    } else {
-      usage()
-    }
-  })
-}
+
   
 const questions = [
   
@@ -222,7 +224,7 @@ inquirer
   .prompt(questions)
   .then(async function({ projectName, projectDesc, tableConfirm }) {
 
-     await appendFileAsync('README.md', `![](https://img.shields.io/badge/GitHub-GET%20THIS%20CODE-blue?style=social&logo=appveyor?&link=https://github.com/skvisual&link=https://github.com/skvisual/README_Generator) \n`) 
+     await appendFileAsync('README.md', `![](https://img.shields.io/badge/GitHub-Get%20the%20code-blue?style=social&logo=appveyor?&link=https://github.com/skvisual&link=https://github.com/skvisual/README_Generator) \n`) 
      await appendFileAsync('README.md','# ' + projectName + `\n`)
      .then(function(){
       //  console.log('append success')
