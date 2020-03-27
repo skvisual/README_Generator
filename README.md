@@ -1,10 +1,8 @@
-# README Generator
-An easy way to create a readme file!
+![](https://img.shields.io/badge/GitHub-GET%20THIS%20CODE-blue?style=social&logo=appveyor?&link=http://https://github.com/skvisual&link=https://github.com/skvisual/README_Generator) 
+# TITLE
+WORDS
 # Table of Contents
-## Features
-Explain the features here
-## Future Developments
-Watch for future developments here
+## HEADER
 ## Installation
 # Usage
 # License

@@ -222,8 +222,8 @@ inquirer
   .prompt(questions)
   .then(async function({ projectName, projectDesc, tableConfirm }) {
 
-       
-     await appendFileAsync('README.md', '# ' + projectName + `\n`)
+     await appendFileAsync('README.md', `![](https://img.shields.io/badge/GitHub-GET%20THIS%20CODE-blue?style=social&logo=appveyor?&link=http://https://github.com/skvisual&link=https://github.com/skvisual/README_Generator) \n`) 
+     await appendFileAsync('README.md','# ' + projectName + `\n`)
      .then(function(){
       //  console.log('append success')
      }).catch(function(err){
